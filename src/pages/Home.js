@@ -1,88 +1,36 @@
-// import React from "react";
-// import "./Home.css";
-
-// function Home() {
-//   return (
-//     <div className="home-container">
-//       <h1>Welcome to Career Solutions Private Limited</h1>
-//       <h2>Your Trusted Partner for Recruitment & Staffing</h2>
-//       <p>Empowering Careers, Enhancing Lives</p>
-//     </div>
-//   );
-// }
-
-// export default Home;
-// import React from "react";
-// import "../styles/common.css";
-
-
-// function Home() {
-//   return (
-//     <div className="container">
-//       <h1>Welcome to Career Solutions Private Limited</h1>
-//       <h2>Your Trusted Partner for Recruitment & Staffing</h2>
-//       <p>Empowering Careers, Enhancing Lives</p>
-//       <button className="cta-button">Explore Our Services</button>
-//     </div>
-//   );
-// }
-
-// export default Home;
-
-
-///// 2 nd one 
-
-// import React from "react";
-// import "../styles/common.css";
-
-// function Home() {
-//   return (
-//     <div className="container">
-//       <h1>Welcome to Career Solutions Private Limited</h1>
-//       <h2>Your Trusted Partner for Recruitment & Staffing</h2>
-//       <p>Empowering Careers, Enhancing Lives</p>
-
-//       <div className="cards-container">
-//         <div className="card">
-//           <h3>Recruitment Services</h3>
-//           <p>Helping businesses find the right talent with our expert hiring solutions.</p>
-//         </div>
-//         <div className="card">
-//           <h3>Staffing Solutions</h3>
-//           <p>Flexible staffing solutions to meet your business needs efficiently.</p>
-//         </div>
-//         <div className="card">
-//           <h3>Career Consulting</h3>
-//           <p>Guiding individuals to build successful careers with our expert advice.</p>
-//         </div>
-//       </div>
-      
-//       <button className="cta-button">Explore Our Services</button>
-//     </div>
-//   );
-// }
-
-// export default Home;
-
-
-
 import React from "react";
-import { Box, Typography, Button, Container, Grid, Paper } from "@mui/material";
+import { Box, Typography, Button, Container, Grid, Card, CardContent } from "@mui/material";
+import { motion } from "framer-motion";
+import { BusinessCenter, Description, Group, Speed } from "@mui/icons-material";
 import "../styles/common.css";
 
 function Home() {
   return (
-    <Box sx={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", padding: "40px 0", backgroundColor: "#f9f9f9" }}>
+    <Box 
+      sx={{ 
+        minHeight: "100vh", 
+        display: "flex", 
+        alignItems: "center", 
+        justifyContent: "center", 
+        padding: "40px 0", 
+        background: "linear-gradient(to right,rgb(247, 251, 255),rgb(76, 205, 241))" 
+      }}
+    >
       <Container maxWidth="md">
-        <Paper elevation={3} sx={{ padding: 4, textAlign: "center", backgroundColor: "white", borderRadius: "10px" }}>
-          <Typography variant="h3" gutterBottom sx={{ fontWeight: "bold", color: "#007bff" }}>
-            Welcome to Career Solutions – Your Trusted Career Partner!
+        <motion.div initial={{ opacity: 0, y: -50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }}>
+          <Typography variant="h3" gutterBottom sx={{ fontWeight: "bold", color: "#007bff",textAlign: "center"}}>
+           <h1>Welcome to Career Solutions</h1>     
           </Typography>
-          <Typography variant="h5" sx={{ marginBottom: 3 }}>
+          {/* <Typography variant="h3" gutterBottom sx={{ fontWeight: "bold", color: "#007bff",textAlign: "center"}}>
+           <h2>Your Trusted Career Partner!</h2>
+          </Typography> */}
+                    <Typography variant="h5" sx={{ marginBottom: 3, textAlign: "center", color: "#007bff",fontWeight: "bold" }}>
+                   Your Trusted Career Partner!
+          </Typography>
+          <Typography variant="h5" sx={{ marginBottom: 3, textAlign: "center", color: "#007bff",fontWeight: "bold" }}>
             Find the Right Opportunity. Build Your Dream Career.
           </Typography>
 
-          {/* Job Seekers Section */}
           <Box sx={{ textAlign: "left", marginBottom: 3 }}>
             <Typography variant="h5" sx={{ fontWeight: "bold", color: "#007bff" }}>
               For Job Seekers:
@@ -92,7 +40,6 @@ function Home() {
             </Typography>
           </Box>
 
-          {/* Employers Section */}
           <Box sx={{ textAlign: "left", marginBottom: 3 }}>
             <Typography variant="h5" sx={{ fontWeight: "bold", color: "#007bff" }}>
               For Employers:
@@ -102,37 +49,65 @@ function Home() {
             </Typography>
           </Box>
 
-          {/* Why Choose Us? */}
-          <Box sx={{ textAlign: "left", marginBottom: 3 }}>
-            <Typography variant="h5" sx={{ fontWeight: "bold", color: "#007bff" }}>
+          <Box sx={{ textAlign: "center", marginBottom: 3 }}>
+            <Typography variant="h5" sx={{ fontWeight: "bold", color: "#007bff", marginBottom: 2 }}>
               Why Choose Us?
             </Typography>
-            <ul>
-              <li>Personalized Career Guidance</li>
-              <li>Expert Resume & Interview Support</li>
-              <li>Access to Leading Companies</li>
-              <li>Fast & Reliable Placement Services</li>
-            </ul>
+            <Grid container spacing={2} justifyContent="center">
+              {[ 
+                { text: "Personalized Career Guidance", icon: <BusinessCenter sx={{ fontSize: 40, color: "#007bff" }} /> },
+                { text: "Expert Resume & Interview Support", icon: <Description sx={{ fontSize: 40, color: "#007bff" }} /> },
+                { text: "Access to Leading Companies", icon: <Group sx={{ fontSize: 40, color: "#007bff" }} /> },
+                { text: "Fast & Reliable Placement Services", icon: <Speed sx={{ fontSize: 40, color: "#007bff" }} /> }
+              ].map((item, index) => (
+                <Grid item xs={12} sm={6} key={index}>
+                  <motion.div whileHover={{ scale: 1.05 }}>
+                    <Card 
+                      elevation={5} 
+                      sx={{ 
+                        background: "#ffffff", 
+                        padding: 2, 
+                        textAlign: "center", 
+                        borderRadius: "10px", 
+                        transition: "background 0.3s ease-in-out, transform 0.3s ease-in-out",
+                        '&:hover': {
+                          background: "linear-gradient(135deg,rgb(127, 209, 234) 0%,rgb(19, 162, 234) 100%)",
+                          transform: "scale(1.05)",
+                          boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.2)"
+                        }
+                      }}
+                    >
+                      <CardContent>
+                        {item.icon}
+                        <Typography variant="body1" sx={{ fontWeight: "bold", marginTop: 1 }}>{item.text}</Typography>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                </Grid>
+              ))}
+            </Grid>
           </Box>
 
-          {/* Buttons */}
           <Grid container spacing={2} justifyContent="center">
             <Grid item>
-              <Button variant="contained" color="primary" size="large">
-                Explore Jobs
-              </Button>
+              <motion.div whileHover={{ scale: 1.1 }}>
+                <Button variant="contained" color="primary" size="large">
+                  Explore Jobs
+                </Button>
+              </motion.div>
             </Grid>
             <Grid item>
-              <Button variant="contained" color="secondary" size="large">
-                Hire Talent
-              </Button>
+              <motion.div whileHover={{ scale: 1.1 }}>
+                <Button variant="contained" color="secondary" size="large">
+                  Hire Talent
+                </Button>
+              </motion.div>
             </Grid>
           </Grid>
-        </Paper>
+        </motion.div>
       </Container>
     </Box>
   );
 }
 
 export default Home;
-

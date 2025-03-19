@@ -10,14 +10,15 @@ import Courses from "./pages/Courses";
 import Contact from "./pages/Contact";
 import CourseDetails from "./pages/CourseDetails";
 import Enquiry from "./pages/Enquiry";
+import DomainDetails from "./pages/DomainDetails";
 
 function App() {
   return (
     <Router>
       <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
         <Navbar />
-        <div style={{ flex: "1", padding: "20px", marginBottom: "50px" }}> 
-          <Routes>
+        <div style={{ flex: "1", padding: "0px", marginBottom: 0 }}>        
+            <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/services" element={<Services />} />
@@ -26,6 +27,8 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/course-details" element={<CourseDetails />} />
             <Route path="/enquiry" element={<Enquiry />} />
+            <Route path="/domain-details" element={<DomainDetails />} />
+
           </Routes>
         </div>
         <Footer style={{ marginTop: "auto" }} />
