@@ -23,9 +23,9 @@ const Footer = () => {
       {/* Address Section with Bright White Text */}
       <Box style={{ color: "white", marginBottom: "10px", fontSize: "16px", fontWeight: "500" }}>
         <Typography variant="h6" style={{ fontWeight: "bold", textTransform: "uppercase", color: "white" }}>Career Solutions Private Limited</Typography>
-        <Typography variant="body2" style={{ fontSize: "14px", color: "white" }}>123 Business Street, Tech City, Country</Typography>
-        <Typography variant="body2" style={{ fontSize: "14px", color: "white" }}>📧 Email: <a href="mailto:info@careersolutions.com" style={{ color: "white", textDecoration: "none", fontWeight: "bold" }}>info@careersolutions.com</a></Typography>
-        <Typography variant="body2" style={{ fontSize: "14px", color: "white" }}>📞 Phone: <a href="tel:+1234567890" style={{ color: "white", textDecoration: "none", fontWeight: "bold" }}>+123 456 7890</a></Typography>
+        <Typography variant="body2" style={{ fontSize: "14px", color: "white" }}> W-583, School Rd, D-Sector, Anna Nagar West Extension, Chennai, Tamil Nadu 600101</Typography>
+        <Typography variant="body2" style={{ fontSize: "14px", color: "white" }}>📧 Email: <a href="mailto:hr@careersolutions.com" style={{ color: "white", textDecoration: "none", fontWeight: "bold" }}>hr@careersolutionss.com</a></Typography>
+        <Typography variant="body2" style={{ fontSize: "14px", color: "white" }}>📞 Phone: <a href="tel:+12345678999" style={{ color: "white", textDecoration: "none", fontWeight: "bold" }}>+91 80989 70087</a></Typography>
       </Box>
 
       {/* Divider */}
