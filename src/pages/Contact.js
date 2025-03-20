@@ -132,7 +132,36 @@ const Contact = () => {
                   <Email sx={{ fontSize: 50, color: "#007bff" }} />
                   <Typography variant="h5" sx={{ fontWeight: "bold", marginTop: 2 }}>Business Email Id</Typography>
                   <Typography variant="body2" sx={{ marginTop: 1, color: "#555" }}>
-                    careersolutionpvtltd@gmail.com
+                    hr@careersolutionss.com
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+            <Grid item xs={12} md={10}>
+              <Card
+                elevation={5}
+                sx={{
+                  padding: 4,
+                  borderRadius: "20px",
+                  textAlign: "center",
+                  minHeight: "200px", // Increase height
+                  maxWidth: "100%",  // Full width of the grid item
+                  transition: "background 0.3s ease-in-out, transform 0.3s ease-in-out",
+                  '&:hover': {
+                    background: "linear-gradient(135deg,rgb(127, 209, 234) 0%,rgb(19, 162, 234) 100%)",
+                    transform: "scale(1.05)",
+                    boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.2)"
+                  }
+                }}
+              >
+                <CardContent>
+                  <Typography variant="h4" sx={{ fontWeight: "bold", marginTop: 2 }}>
+                    Get in Touch with Career Solution 👋
+                  </Typography>
+                  <Typography variant="body1" sx={{ marginTop: 2, color: "#555", fontSize: "1.2rem" }}>
+                    Feel free to connect with us for any of your needs regarding our services.
+                    Our support team is ready to solve any of your issues. Just push a text to us and
+                    we will get back to you soon.
                   </Typography>
                 </CardContent>
               </Card>
