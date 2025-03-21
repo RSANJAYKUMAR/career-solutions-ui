@@ -28,7 +28,7 @@ const Enquiry = () => {
     if (validate()) {
       setLoading(true);
       try {
-        const response = await fetch("http://localhost:8000/submit.php", {
+        const response = await fetch("https://careersolutionss.com/backend/submit.php", {
           method: "POST",
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
