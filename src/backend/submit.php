@@ -89,7 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mail->setFrom('careersolutionsspvtltd@gmail.com', 'Career Solutions');
         $mail->addAddress('hr@careersolutionss.com');
         $mail->isHTML(true);
-        $mail->Subject = 'Inquiry from ' . $name;
+        $mail->Subject = 'Enquiry from ' . $name;
         $mail->Body = "Name: $name<br>Email: $email<br>Phone: $phone<br>Message: $message";
  
         $mail->send();
