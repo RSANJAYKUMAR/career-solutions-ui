@@ -106,7 +106,7 @@ const Contact = () => {
                   <Phone sx={{ fontSize: 50, color: "#007bff" }} />
                   <Typography variant="h5" sx={{ fontWeight: "bold", marginTop: 2 }}>Mobile Number</Typography>
                   <Typography variant="body2" sx={{ marginTop: 1, color: "#555" }}>
-                    +91 80989 70087
+                    +91 93607 18107
                   </Typography>
                 </CardContent>
               </Card>

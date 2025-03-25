@@ -1,68 +1,160 @@
-import React from "react";
-import { AppBar, Toolbar, Typography, Box, IconButton, Avatar } from "@mui/material";
-import { Instagram, LinkedIn, WhatsApp, YouTube } from "@mui/icons-material";
+// import React from "react";
+// import { AppBar, Toolbar, Typography, Box, IconButton, Avatar } from "@mui/material";
+// import { Instagram, LinkedIn, WhatsApp, YouTube } from "@mui/icons-material";
+// import { Link } from "react-router-dom";
+
+
+
+// const Navbar = () => {
+//   return (
+//     <AppBar
+//       position="static"
+//       style={{
+//         background: "#007bff",
+//         color: "white",
+//         padding: "10px 20px",
+//         fontWeight: "bold",
+//         top: "0px",
+//         width: "100%",
+//         margin: 0,
+//         display: "flex" // Missing closing curly brace
+//       }}
+//     >
+//       <Toolbar style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+//         {/* Logo / Title */}
+//         <div style={{ display: "flex", alignItems: "center" }}>
+//           <Link to="/" style={{ display: "flex", alignItems: "center", color: "white", textDecoration: "none" }}>
+//             <Avatar
+//               alt="Career Solutions Logo"
+//               src="/assets/courses/LOGO.jpeg"
+//               style={{ marginRight: 8 }}
+//             />
+//             <Typography variant="h5" style={{ fontWeight: "bold", textTransform: "uppercase" }}>
+//               Career Solutions
+//             </Typography>
+//           </Link>
+//         </div>
+//         {/* Navigation Links */}
+//         <Box component="ul" style={{ listStyle: "none", display: "flex", gap: "20px", margin: 0, padding: 0 }}>
+//           <li><Link to="/" style={{ color: "white", textDecoration: "none", fontSize: "16px", fontWeight: "600" }}>Home</Link></li>
+//           <li><Link to="/about" style={{ color: "white", textDecoration: "none", fontSize: "16px", fontWeight: "600" }}>About Us</Link></li>
+//           <li><Link to="/services" style={{ color: "white", textDecoration: "none", fontSize: "16px", fontWeight: "600" }}>Services</Link></li>
+//           <li><Link to="/courses" style={{ color: "white", textDecoration: "none", fontSize: "16px", fontWeight: "600" }}>Courses</Link></li>
+//           <li><Link to="/domains" style={{ color: "white", textDecoration: "none", fontSize: "16px", fontWeight: "600" }}>Domains</Link></li>
+//           <li><Link to="/contact" style={{ color: "white", textDecoration: "none", fontSize: "16px", fontWeight: "600" }}>Contact Us</Link></li>
+//           <li><Link to="/enquiry" style={{ color: "white", textDecoration: "none", fontSize: "16px", fontWeight: "600" }}>Enquiry</Link></li>
+//         </Box>
+
+//         {/* Social Media Icons */}
+//         <Box display="flex" justifyContent="center">
+//           <IconButton component="a" href="https://www.instagram.com/career_placement_solutions?igsh=MWp3bW91ODZ1dXVpNg==" target="_blank" rel="noopener noreferrer">
+//             <Instagram style={{ color: "white" }} />
+//           </IconButton>
+//           <IconButton component="a" href="https://www.linkedin.com/in/career-solutions-73786b355?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BybmkLYZ2ReiIhSEddEuhmg%3D%3D" target="_blank" rel="noopener noreferrer">
+//             <LinkedIn style={{ color: "white" }} />
+//           </IconButton>
+//           <IconButton component="a" href="https://api.whatsapp.com/send/?phone=8098970087&text&app_absent=0" target="_blank" rel="noopener noreferrer">
+//             <WhatsApp style={{ color: "white" }} />
+//           </IconButton>
+//           <IconButton component="a" href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">
+//             <YouTube style={{ color: "white" }} />
+//           </IconButton>
+//         </Box>
+//       </Toolbar>
+//     </AppBar>
+//   );
+// };
+
+// export default Navbar;
+
+
+import React, { useState } from "react";
+import { AppBar, Toolbar, Typography, IconButton, Box, Drawer, List, ListItem, ListItemText } from "@mui/material";
+import { Menu as MenuIcon, Close as CloseIcon } from "@mui/icons-material";
 import { Link } from "react-router-dom";
-
-
-
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
+ 
 const Navbar = () => {
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md")); // Mobile View
+ 
+  // Updated Menu Items with correct paths
+  const menuItems = [
+    { name: "Home", path: "/" },
+    { name: "About", path: "/about" },
+    { name: "Services", path: "/services" },
+    { name: "Courses", path: "/courses" },
+    { name: "Domains", path: "/domains" },
+    { name: "Contact", path: "/contact" },
+    { name: "Enquiry Form", path: "/enquiry" }, // Added Inquiry Form
+  ];
+ 
   return (
-    <AppBar
-      position="static"
-      style={{
-        background: "#007bff",
-        color: "white",
-        padding: "10px 20px",
-        fontWeight: "bold",
-        top: "0px",
-        width: "100%",
-        margin: 0,
-        display: "flex" // Missing closing curly brace
-      }}
-    >
-      <Toolbar style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        {/* Logo / Title */}
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <Link to="/" style={{ display: "flex", alignItems: "center", color: "white", textDecoration: "none" }}>
-            <Avatar
-              alt="Career Solutions Logo"
-              src="/assets/courses/LOGO.jpeg"
-              style={{ marginRight: 8 }}
-            />
-            <Typography variant="h5" style={{ fontWeight: "bold", textTransform: "uppercase" }}>
-              Career Solutions
-            </Typography>
-          </Link>
-        </div>
-        {/* Navigation Links */}
-        <Box component="ul" style={{ listStyle: "none", display: "flex", gap: "20px", margin: 0, padding: 0 }}>
-          <li><Link to="/" style={{ color: "white", textDecoration: "none", fontSize: "16px", fontWeight: "600" }}>Home</Link></li>
-          <li><Link to="/about" style={{ color: "white", textDecoration: "none", fontSize: "16px", fontWeight: "600" }}>About Us</Link></li>
-          <li><Link to="/services" style={{ color: "white", textDecoration: "none", fontSize: "16px", fontWeight: "600" }}>Services</Link></li>
-          <li><Link to="/courses" style={{ color: "white", textDecoration: "none", fontSize: "16px", fontWeight: "600" }}>Courses</Link></li>
-          <li><Link to="/domains" style={{ color: "white", textDecoration: "none", fontSize: "16px", fontWeight: "600" }}>Domains</Link></li>
-          <li><Link to="/contact" style={{ color: "white", textDecoration: "none", fontSize: "16px", fontWeight: "600" }}>Contact Us</Link></li>
-          <li><Link to="/enquiry" style={{ color: "white", textDecoration: "none", fontSize: "16px", fontWeight: "600" }}>Enquiry</Link></li>
+    <AppBar position="static" sx={{ backgroundColor: "#007bff" }}>
+      <Toolbar sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+ 
+        {/* Logo with Home link */}
+        <Box component={Link} to="/" sx={{ display: "flex", alignItems: "center", textDecoration: "none" }}>
+          <img src="/assets/courses/LOGO.jpeg" alt="Career Solutions Logo" style={{ maxHeight: "40px", width: "auto" }} />
+          <Typography variant="h6" sx={{ ml: 1, color: "white", fontWeight: "bold" }}>
+            Career Solutions
+          </Typography>
         </Box>
-
-        {/* Social Media Icons */}
-        <Box display="flex" justifyContent="center">
-          <IconButton component="a" href="https://www.instagram.com/career_placement_solutions?igsh=MWp3bW91ODZ1dXVpNg==" target="_blank" rel="noopener noreferrer">
-            <Instagram style={{ color: "white" }} />
+ 
+        {/* Desktop View: Full Menu */}
+        {!isMobile && (
+          <Box sx={{ display: "flex", gap: "20px" }}>
+            {menuItems.map((item) => (
+              <Typography
+                key={item.name}
+                component={Link}
+                to={item.path}
+                sx={{ color: "white", textDecoration: "none", fontSize: "16px", fontWeight: "500" }}
+              >
+                {item.name}
+              </Typography>
+            ))}
+          </Box>
+        )}
+ 
+        {/* Mobile View: Hamburger Menu */}
+        {isMobile && (
+          <IconButton edge="end" color="inherit" onClick={() => setDrawerOpen(true)}>
+            <MenuIcon />
           </IconButton>
-          <IconButton component="a" href="https://www.linkedin.com/in/career-solutions-73786b355?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BybmkLYZ2ReiIhSEddEuhmg%3D%3D" target="_blank" rel="noopener noreferrer">
-            <LinkedIn style={{ color: "white" }} />
-          </IconButton>
-          <IconButton component="a" href="https://api.whatsapp.com/send/?phone=8098970087&text&app_absent=0" target="_blank" rel="noopener noreferrer">
-            <WhatsApp style={{ color: "white" }} />
-          </IconButton>
-          <IconButton component="a" href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">
-            <YouTube style={{ color: "white" }} />
-          </IconButton>
-        </Box>
+        )}
       </Toolbar>
+ 
+      {/* Drawer (Mobile Sidebar Menu) */}
+      <Drawer anchor="right" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
+        <Box sx={{ width: 250, background: "#007bff", height: "100%", color: "white" }}>
+          {/* Close Button */}
+          <Box sx={{ display: "flex", justifyContent: "flex-end", padding: "10px" }}>
+            <IconButton onClick={() => setDrawerOpen(false)} sx={{ color: "white" }}>
+              <CloseIcon />
+            </IconButton>
+          </Box>
+ 
+          {/* Menu List */}
+          <List>
+            {menuItems.map((item) => (
+              <ListItem
+                key={item.name}
+                component={Link}
+                to={item.path}
+                onClick={() => setDrawerOpen(false)}
+                sx={{ textDecoration: "none", color: "white" }}
+              >
+                <ListItemText primary={item.name} />
+              </ListItem>
+            ))}
+          </List>
+        </Box>
+      </Drawer>
     </AppBar>
   );
 };
-
+ 
 export default Navbar;
