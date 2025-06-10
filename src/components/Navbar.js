@@ -260,7 +260,7 @@ const Navbar = () => {
           <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
             <Phone sx={{ fontSize: 18, color: "#00ffff", mr: 2 }} />
             <Typography variant="body2" sx={{ color: "white", fontWeight: 600 }}>
-              +91 80989 70087
+              +91 9360718107
             </Typography>
           </Box>
           <Box sx={{ display: "flex", alignItems: "center" }}>

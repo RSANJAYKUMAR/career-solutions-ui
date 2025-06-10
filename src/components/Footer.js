@@ -548,8 +548,8 @@ const Footer = () => {
                       {
                         icon: <Phone />,
                         title: "Direct Line",
-                        content: "+91 80989 70087",
-                        link: "tel:+918098970087",
+                        content: "+91 93607 18107",
+                        link: "tel:+91 93607 18107",
                         color: "#00ff88",
                       },
                     ].map((contact, index) => (

@@ -112,7 +112,7 @@ const Contact = () => {
     {
       icon: <Phone sx={{ fontSize: 40, color: "#4dabf5" }} />,
       title: "Phone Number",
-      content: "+91 80989 70087",
+      content: "+91 93607 18107",
     },
     {
       icon: <Email sx={{ fontSize: 40, color: "#4dabf5" }} />,
@@ -478,7 +478,7 @@ const Contact = () => {
                           Business Hours
                         </Typography>
                         <Typography variant="body2" sx={{ color: "#555" }}>
-                          Mon - Fri: 9:00 AM - 6:00 PM
+                          Mon - Fri: 1:00 AM - 6:30 PM
                         </Typography>
                       </Box>
                     </Box>

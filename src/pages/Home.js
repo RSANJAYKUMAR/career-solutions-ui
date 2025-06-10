@@ -161,6 +161,7 @@ function Home() {
                 <Button
                   variant="contained"
                   size="large"
+                   onClick={() => navigate("/enquiry")}
                   sx={{
                     bgcolor: "#4dabf5",
                     px: 5,
