@@ -1,27 +1,438 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
-import { Container, Typography, Card, CardMedia, CardContent, Box } from "@mui/material";
+"use client"
+
+import { useState, useEffect } from "react"
+import { useLocation, useNavigate } from "react-router-dom"
+import {
+  Container,
+  Typography,
+  Card,
+  CardContent,
+  Box,
+  Button,
+  Chip,
+  Grid,
+  Divider,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material"
+import { ArrowBack, Schedule, TrendingUp, CheckCircle } from "@mui/icons-material"
 
 const CourseDetails = () => {
-  const location = useLocation();
-  const { course } = location.state || {}; // Get course details from state
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"))
+  const [isLoaded, setIsLoaded] = useState(false)
+  const location = useLocation()
+  const navigate = useNavigate()
+  const { course } = location.state || {}
+
+  useEffect(() => {
+    setIsLoaded(true)
+  }, [])
 
   if (!course) {
-    return <Typography variant="h6" align="center">No course data available.</Typography>;
+    return (
+      <Box
+        sx={{
+          minHeight: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          bgcolor: "#f8f9fa",
+        }}
+      >
+        <Container maxWidth="md" sx={{ textAlign: "center" }}>
+          <Typography variant="h4" sx={{ color: "#2E3B55", fontWeight: 600, mb: 2 }}>
+            Course Not Found
+          </Typography>
+          <Typography variant="body1" sx={{ color: "#555", mb: 3 }}>
+            The course you're looking for doesn't exist or has been removed.
+          </Typography>
+          <Button
+            variant="contained"
+            onClick={() => navigate("/courses")}
+            sx={{
+              bgcolor: "#4dabf5",
+              "&:hover": { bgcolor: "#2196f3" },
+            }}
+          >
+            Back to Courses
+          </Button>
+        </Container>
+      </Box>
+    )
   }
 
-  return (
-    <Box sx={{ minHeight: "100vh", display: "flex", alignItems: "right", justifyContent: "center", background: "linear-gradient(to right,rgb(247, 251, 255),rgb(76, 205, 241))", padding: "40px 0" }}>
-      <Container>
-        <Box display="flex" flexDirection="column" alignItems="center">
-          <CardContent sx={{ textAlign: "center", maxWidth: "800px", backgroundColor: "white", padding: "20px", borderRadius: "10px", boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)" }}>
-            <Typography variant="h4" gutterBottom sx={{ fontWeight: "bold", color: "#007bff" }}>{course.name}</Typography>
-            <Typography variant="body1" paragraph>{course.description}</Typography>
-          </CardContent>
-        </Box>
-      </Container>
-    </Box>
-  );
-};
+  const getLevelColor = (level) => {
+    switch (level) {
+      case "Beginner":
+        return "#4caf50"
+      case "Intermediate":
+        return "#ff9800"
+      case "Advanced":
+        return "#f44336"
+      default:
+        return "#4dabf5"
+    }
+  }
 
-export default CourseDetails;
+  const features = [
+    "Hands-on practical sessions",
+    "Industry-relevant curriculum",
+    "Expert instructor guidance",
+    "Certificate upon completion",
+    "Lifetime access to materials",
+    "Career support and guidance",
+  ]
+
+  return (
+    <Box sx={{ bgcolor: "#f8f9fa", minHeight: "100vh" }}>
+      {/* Hero Section */}
+      <Box
+        sx={{
+          background: "linear-gradient(135deg, #2E3B55 0%, #142238 100%)",
+          color: "white",
+          py: { xs: 8, md: 12 },
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        {/* Animated background elements */}
+        <Box
+          sx={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            overflow: "hidden",
+            zIndex: 0,
+          }}
+        >
+          {[...Array(15)].map((_, i) => (
+            <Box
+              key={i}
+              sx={{
+                position: "absolute",
+                width: Math.random() * 80 + 40,
+                height: Math.random() * 80 + 40,
+                borderRadius: "50%",
+                background: "rgba(255,255,255,0.03)",
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                animation: `float ${Math.random() * 10 + 10}s infinite ease-in-out`,
+                animationDelay: `${Math.random() * 5}s`,
+              }}
+            />
+          ))}
+        </Box>
+
+        <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1 }}>
+          <Box
+            sx={{
+              transform: isLoaded ? "translateY(0)" : "translateY(30px)",
+              opacity: isLoaded ? 1 : 0,
+              transition: "all 0.8s ease-out",
+            }}
+          >
+            <Button
+              startIcon={<ArrowBack />}
+              onClick={() => navigate("/courses")}
+              sx={{
+                color: "white",
+                mb: 3,
+                "&:hover": {
+                  bgcolor: "rgba(255,255,255,0.1)",
+                },
+              }}
+            >
+              Back to Courses
+            </Button>
+
+            <Grid container spacing={4} alignItems="center">
+              <Grid item xs={12} md={8}>
+                <Box sx={{ display: "flex", gap: 2, mb: 2, flexWrap: "wrap" }}>
+                  {course.level && (
+                    <Chip
+                      label={course.level}
+                      sx={{
+                        bgcolor: getLevelColor(course.level),
+                        color: "white",
+                        fontWeight: 600,
+                      }}
+                    />
+                  )}
+                  {course.duration && (
+                    <Chip
+                      icon={<Schedule sx={{ fontSize: 16 }} />}
+                      label={course.duration}
+                      sx={{
+                        bgcolor: "rgba(255,255,255,0.2)",
+                        color: "white",
+                        fontWeight: 500,
+                      }}
+                    />
+                  )}
+                  <Chip
+                    icon={<TrendingUp sx={{ fontSize: 16 }} />}
+                    label="Popular"
+                    sx={{
+                      bgcolor: "#4caf50",
+                      color: "white",
+                      fontWeight: 500,
+                    }}
+                  />
+                </Box>
+
+                <Typography
+                  variant="h2"
+                  component="h1"
+                  sx={{
+                    fontWeight: 700,
+                    mb: 2,
+                    fontSize: { xs: "2rem", md: "2.5rem" },
+                  }}
+                >
+                  {course.name}
+                </Typography>
+
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontWeight: 300,
+                    opacity: 0.9,
+                    mb: 3,
+                  }}
+                >
+                  {course.description}
+                </Typography>
+
+                <Button
+                  variant="contained"
+                  size="large"
+                  sx={{
+                    bgcolor: "#4dabf5",
+                    px: 4,
+                    py: 1.5,
+                    fontSize: "1rem",
+                    fontWeight: 600,
+                    borderRadius: "4px",
+                    boxShadow: "0 4px 14px 0 rgba(77, 171, 245, 0.39)",
+                    "&:hover": {
+                      bgcolor: "#2196f3",
+                      boxShadow: "0 6px 20px rgba(77, 171, 245, 0.6)",
+                    },
+                  }}
+                >
+                  Enroll Now
+                </Button>
+              </Grid>
+
+              <Grid item xs={12} md={4}>
+                <Box
+                  sx={{
+                    position: "relative",
+                    height: "300px",
+                    borderRadius: "10px",
+                    overflow: "hidden",
+                    boxShadow: "0 20px 40px rgba(0,0,0,0.3)",
+                  }}
+                >
+                  <Box
+                    component="img"
+                    src={course.image}
+                    alt={course.name}
+                    sx={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                  />
+                </Box>
+              </Grid>
+            </Grid>
+          </Box>
+        </Container>
+      </Box>
+
+      {/* Course Content */}
+      <Container maxWidth="lg" sx={{ py: 10 }}>
+        <Grid container spacing={6}>
+          {/* Main Content */}
+          <Grid
+            item
+            xs={12}
+            md={8}
+            sx={{
+              transform: isLoaded ? "translateY(0)" : "translateY(30px)",
+              opacity: isLoaded ? 1 : 0,
+              transition: "all 0.8s ease-out 0.3s",
+            }}
+          >
+            <Card
+              sx={{
+                borderRadius: "10px",
+                boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
+                mb: 4,
+              }}
+            >
+              <CardContent sx={{ p: 4 }}>
+                <Typography variant="h4" sx={{ fontWeight: 600, mb: 3, color: "#2E3B55" }}>
+                  Course Overview
+                </Typography>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    lineHeight: 1.8,
+                    color: "#555",
+                    fontSize: "1.1rem",
+                    textAlign: "justify",
+                  }}
+                >
+                  {course.description}
+                </Typography>
+              </CardContent>
+            </Card>
+
+            <Card
+              sx={{
+                borderRadius: "10px",
+                boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
+              }}
+            >
+              <CardContent sx={{ p: 4 }}>
+                <Typography variant="h5" sx={{ fontWeight: 600, mb: 3, color: "#2E3B55" }}>
+                  What You'll Learn
+                </Typography>
+                <Grid container spacing={2}>
+                  {features.map((feature, index) => (
+                    <Grid item xs={12} sm={6} key={index}>
+                      <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
+                        <CheckCircle sx={{ fontSize: 20, color: "#4caf50", mr: 2 }} />
+                        <Typography variant="body1" sx={{ color: "#555" }}>
+                          {feature}
+                        </Typography>
+                      </Box>
+                    </Grid>
+                  ))}
+                </Grid>
+              </CardContent>
+            </Card>
+          </Grid>
+
+          {/* Sidebar */}
+          <Grid
+            item
+            xs={12}
+            md={4}
+            sx={{
+              transform: isLoaded ? "translateY(0)" : "translateY(30px)",
+              opacity: isLoaded ? 1 : 0,
+              transition: "all 0.8s ease-out 0.5s",
+            }}
+          >
+            <Card
+              sx={{
+                borderRadius: "10px",
+                boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
+                mb: 3,
+                position: "sticky",
+                top: 20,
+              }}
+            >
+              <CardContent sx={{ p: 4 }}>
+                <Typography variant="h5" sx={{ fontWeight: 600, mb: 3, color: "#2E3B55" }}>
+                  Course Information
+                </Typography>
+
+                <Box sx={{ mb: 3 }}>
+                  <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 1, color: "#2E3B55" }}>
+                    Duration
+                  </Typography>
+                  <Typography variant="body1" sx={{ color: "#555" }}>
+                    {course.duration || "Self-paced"}
+                  </Typography>
+                </Box>
+
+                <Box sx={{ mb: 3 }}>
+                  <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 1, color: "#2E3B55" }}>
+                    Level
+                  </Typography>
+                  <Chip
+                    label={course.level || "All Levels"}
+                    sx={{
+                      bgcolor: getLevelColor(course.level),
+                      color: "white",
+                      fontWeight: 600,
+                    }}
+                  />
+                </Box>
+
+                <Box sx={{ mb: 3 }}>
+                  <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 1, color: "#2E3B55" }}>
+                    Format
+                  </Typography>
+                  <Typography variant="body1" sx={{ color: "#555" }}>
+                    Online & Hands-on
+                  </Typography>
+                </Box>
+
+                <Divider sx={{ my: 3 }} />
+
+                <Button
+                  variant="contained"
+                  fullWidth
+                  size="large"
+                  sx={{
+                    bgcolor: "#4dabf5",
+                    py: 1.5,
+                    fontSize: "1rem",
+                    fontWeight: 600,
+                    borderRadius: "4px",
+                    boxShadow: "0 4px 14px 0 rgba(77, 171, 245, 0.39)",
+                    "&:hover": {
+                      bgcolor: "#2196f3",
+                      boxShadow: "0 6px 20px rgba(77, 171, 245, 0.6)",
+                    },
+                  }}
+                >
+                  Enroll Now
+                </Button>
+
+                <Button
+                  variant="outlined"
+                  fullWidth
+                  size="large"
+                  sx={{
+                    mt: 2,
+                    color: "#4dabf5",
+                    borderColor: "#4dabf5",
+                    py: 1.5,
+                    fontSize: "1rem",
+                    fontWeight: 600,
+                    borderRadius: "4px",
+                    "&:hover": {
+                      borderColor: "#2196f3",
+                      bgcolor: "rgba(77, 171, 245, 0.05)",
+                    },
+                  }}
+                >
+                  Contact Us
+                </Button>
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
+      </Container>
+
+      <style jsx>{`
+        @keyframes float {
+          0% { transform: translateY(0) rotate(0deg); }
+          50% { transform: translateY(-20px) rotate(10deg); }
+          100% { transform: translateY(0) rotate(0deg); }
+        }
+      `}</style>
+    </Box>
+  )
+}
+
+export default CourseDetails

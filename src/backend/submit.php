@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
@@ -9,17 +12,19 @@ use PHPMailer\PHPMailer\Exception;
 
 require 'vendor/autoload.php';
 
-// Initialize response array
 $response = ["success" => false, "message" => ""];
 
-// Check request method
+// Only proceed on POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = trim($_POST['name'] ?? '');
-    $email = trim($_POST['email'] ?? '');
-    $phone = trim($_POST['phone'] ?? '');
-    $message = trim($_POST['message'] ?? '');
+    // Parse JSON input
+    $data = json_decode(file_get_contents("php://input"), true);
 
-    // Ensure all fields are filled
+    $name = trim($data['name'] ?? '');
+    $email = trim($data['email'] ?? '');
+    $phone = trim($data['phone'] ?? '');
+    $message = trim($data['message'] ?? '');
+
+    // Validate
     if (empty($name) || empty($email) || empty($phone) || empty($message)) {
         $response["message"] = "All fields are required.";
         echo json_encode($response);
@@ -29,23 +34,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $mail = new PHPMailer(true);
 
     try {
-        // SMTP settings
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
         $mail->Username = 'careersolutionsspvtltd@gmail.com';
-        $mail->Password = 'vneh wsxv qlbq wsrv'; // Replace with App Password
+        $mail->Password = 'vneh wsxv qlbq wsrv'; // App Password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
 
-        // Email content
         $mail->setFrom('careersolutionsspvtltd@gmail.com', 'Career Solutions');
-        $mail->addAddress('hr@careersolutionss.com');
+        $mail->addAddress('hr@careersolutionss.com'); // Change if needed
+
         $mail->isHTML(true);
         $mail->Subject = 'New Inquiry from Career Solutions';
-        $mail->Body = "Name: $name<br>Email: $email<br>Phone: $phone<br>Message: $message";
+        $mail->Body = "
+            <strong>Name:</strong> $name<br>
+            <strong>Email:</strong> $email<br>
+            <strong>Phone:</strong> $phone<br>
+            <strong>Message:</strong><br>$message
+        ";
 
-        // Send email
         $mail->send();
         $response["success"] = true;
         $response["message"] = "Your enquiry has been submitted successfully!";
@@ -54,7 +62,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Ensure no additional output and return JSON response
 echo json_encode($response);
 exit;
-?>
